@@ -14,5 +14,5 @@ And by minimalistic i mean minimalistic.
 
 ## How to Run it:
 Edit the config.js to your liking and hit `node app`
-For better understandment of the config-file, have a look at [config.js](config.js)
+For better understandment of the config-file, have a look at [config.js](config.example.js)
 
