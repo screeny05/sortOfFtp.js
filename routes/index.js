@@ -3,11 +3,11 @@ var conf = require("../config");
 var path = require('path');
 
 exports.index = function(req, res){
-	if(req.user != conf.secret){
+	if(!req.user){
 		res.render('index', { title: 'Please Auth.', loggedIn: false });
 	}
 	else{
-		ftp.GetFiles(decodeURIComponent(req.url), res, function(err, files, folder, parent, curdir){
+		ftp.GetFiles(decodeURIComponent(req.url), req, res, function(err, files, folder, parent, curdir){
 			var parent = path.join(req.url, "..");
 			parent = parent === "\\" ? "/" : parent + "/";
 			console.log(path.join(req.url, ".."));
@@ -17,7 +17,7 @@ exports.index = function(req, res){
 };
 
 exports.upload = function(req, res){
-	if(req.user == conf.secret){
+	if(req.user){
 		if(req.files.file){
 			ftp.SendFile(req.files.file.path, path.join(req.body.path, req.files.file.name), function(err){
 				if(err)
@@ -43,8 +43,8 @@ exports.remove = function(req, res){
 };
 
 exports.remove_yes = function(req, res){
-	if(req.user == conf.secret){
-		ftp.remove(req.params[0], function(err, redirect){
+	if(req.user){
+		ftp.remove(req, req.params[0], function(err, redirect){
 			if(err)
 				res.render('index', { title: "Error!", err: err, loggedIn: true });
 			else

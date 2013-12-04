@@ -1,5 +1,7 @@
 # NodeJS
 node_modules/
+config.js
+config.lc.js
 
 #################
 ## Eclipse

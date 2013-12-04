@@ -25,14 +25,16 @@ passport.serializeUser(function(user, done){
 	done(null, user);
 });
 
-passport.deserializeUser(function(id, done){
-	done(null, id);
+passport.deserializeUser(function(user, done){
+	done(null, user);
+    console.log(user)
 });
 
 
 passport.use(new FacebookStrategy(conf.fbcreds, function(accessToken, refreshToken, profile, done){
-	if(profile.emails[0].value == conf.mail){
-		done(null, conf.secret)
+  var u = getUser(profile.emails[0].value);
+  if(u){
+		done(null, u)
 	} else {
 		done(null, false);
 		console.log("failed to login", profile);
@@ -48,3 +50,10 @@ app.post('/_sys/upload', routes.upload);
 app.get('*', routes.index);
 
 http.createServer(app).listen(80);
+
+var getUser = function(email){
+  for (var i = 0; i < conf.user.length; i++) {
+    if(conf.user[i].mail === email)
+      return conf.user[i];
+  };
+}

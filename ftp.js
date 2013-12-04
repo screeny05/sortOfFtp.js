@@ -2,8 +2,8 @@ var fs = require('fs');
 var path = require('path');
 var conf = require("./config");
 
-exports.GetFiles = function(dir, res, callback){
-	var curdir = path.join(conf.root, dir);
+exports.GetFiles = function(dir, req, res, callback){
+	var curdir = path.join(req.user.path, dir);
 	fs.stat(curdir, function(err, stats){
 		if(err)
 			return callback(err);
@@ -49,8 +49,8 @@ exports.SendFile = function(tmpPath, uploadPath, callback){
 	s.on('error', callback);
 };
 
-exports.remove = function(loc_, callback){
-	var loc = path.join(conf.root, loc_);
+exports.remove = function(req, loc_, callback){
+	var loc = path.join(req.user.path, loc_);
 	fs.stat(loc, function(err, stats){
 		if(err)
 			return callback(err);
