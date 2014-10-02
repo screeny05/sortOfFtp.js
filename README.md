@@ -3,6 +3,9 @@ sortOfFtp.js
 
 Maybe "minimalistic file manager" is a better description
 
+## Screenshot
+![Screenshot](http://goo.gl/EjfcaM)
+
 ## What it is:
 sortOfFtp.js is a file manager on the web which uses nothing, but your email-address as authorization.
 It does this by using a facebook app which returns the email-address of the user who authenticated the app.

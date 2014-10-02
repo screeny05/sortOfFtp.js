@@ -46,14 +46,14 @@
 
           {% for item in items %}
             <div data-name="{{item.filename.toLowerCase()}}" class="list-group-item row {% if item.eperm %}disabled{% endif %} {% if item.hidden %}item-hidden{% endif %}" {% if item.hidden %}data-hidden="true"{% endif %}>
-              <a class="col-md-11" href="{{item.filename}}{% if item.type == 'folder' %}/{% endif %}">
-                <span class="icon-file-{% if item.type == 'folder' %}directory{% else %}text{% endif %}" {% if item.type == 'file' %}data-name="{{item.filename.toLowerCase()}}"{% endif %}></span>
+            <a class="col-md-10" href="{{item.filename}}{% if item.type == 'folder' %}/{% endif %}">
+                <span class="icon-file-{% if item.type == 'folder' %}directory{% else %}text{% endif %}" data-name="{{item.filename.toLowerCase()}}"></span>
                 <span class="filename">{{item.filename}}{% if item.type == "folder" %}/{% endif %}</span>
               </a>
-              <div class="col-md-1">
+              {#<div class="col-md-2">
                 <a href="/_sys/delete{{item.absolutePath}}">del</a>
                 <a href="del">del</a>
-              </div>
+              </div>#}
             </div>
           {% endfor %}
 
