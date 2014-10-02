@@ -1,0 +1,213 @@
+@import "fonts.less";
+@import "icons.less";
+@import "items.less";
+
+// Defaults
+.icon-file-text, .icon-file-directory, .icon-file-media, .icon-book {
+  &:before { text-align: center; }
+  margin-right: 15px;
+}
+
+// Standard directory
+.icon-file-directory:before { .directory-icon; }
+
+// Github icon
+.icon-file-directory[data-name=".git"]:before { .git-icon; }
+
+// Package icon
+.icon-file-directory[data-name=".bundle"]:before { .package-icon; }
+
+// Non-file icons
+.icon-search:before { .search-icon; }
+
+.icon-file-text {
+
+  &:before { .text-icon; }
+
+  // Checklist icon
+  &[data-name$="TODO"]:before { .checklist-icon; }
+
+  // Code icon
+  &[data-name$=".xml"]:before,
+  &[data-name$=".jl"]:before { .code-icon; }
+
+  // JavaScript icon
+  &[data-name$=".js"]:before,
+  &[data-name$=".jsx"]:before,
+  &[data-name$=".ts"]:before  { .js-icon; }
+
+  // Coffee icon
+  &[data-name$=".coffee"]:before,
+  &[data-name$=".litcoffee"]:before { .coffee-icon; }
+
+  // CSS3 icon
+  &[data-name$=".less"]:before,
+  &[data-name$=".css"]:before,
+  &[data-name$=".styl"]:before { .css3-icon; }
+
+  // Dashboard icon
+  &[data-name$=".slim"]:before,
+  &[data-name$=".skim"]:before { .dashboard-icon; }
+
+  // Database icon
+  &[data-name$=".json"]:before,
+  &[data-name$=".cson"]:before,
+  &[data-name$=".yml"]:before,
+  &[data-name$=".yaml"]:before { .database-icon; }
+
+  // Elixir icon
+  &[data-name$=".ex"]:before,
+  &[data-name$=".exs"]:before,
+  &[data-name$="mix.exs"]:before,
+  &[data-name$="mix.ex"]:before { .elixir-icon; }
+
+  // Erlang icon
+  &[data-name$=".erl"]:before,
+  &[data-name$=".beam"]:before { .erlang-icon; }
+
+  // HTML5 icon
+  &[data-name$=".erb"]:before,
+  &[data-name$=".html"]:before,
+  &[data-name$=".haml"]:before,
+  &[data-name$=".jade"]:before,
+  &[data-name$=".swig"]:before,
+  &[data-name$=".jsp"]:before,
+  &[data-name$=".ctp"]:before,
+  &[data-name$=".ejs"]:before  { .html5-icon; }
+
+  // Mustache icon
+  &[data-name$=".hbs"]:before,
+  &[data-name$=".handlebars"]:before,
+  &[data-name$=".mustache"]:before { .hbs-mustache-icon; }
+
+  // Smarty icon
+  &[data-name$=".tpl"]:before { .smarty-icon; }
+
+  // Gear icon
+  &[data-name$=".gitignore"]:before,
+  &[data-name$=".gitattributes"]:before,
+  &[data-name=".gitmodules"]:before,
+  &[data-name=".mailmap"]:before,
+  &[data-name$=".editorconfig"]:before,
+  &[data-name$=".jshintrc"]:before,
+  &[data-name$=".jscsrc"]:before,
+  &[data-name$=".module"]:before,
+  &[data-name$=".htaccess"]:before { .gear-icon; }
+
+  // Npm icon
+  &[data-name=".npmrc"]:before,
+  &[data-name=".npmignore"]:before,
+  &[data-name="npm-debug.log"]:before { .node-icon; }
+
+  // Bower icon
+  &[data-name=".bowerrc"]:before,
+  &[data-name="bower.json"]:before { .bower-icon; }
+
+  // Sass icon
+  &[data-name$=".sass"]:before,
+  &[data-name$=".scss"]:before { .sass-icon; }
+
+  // PHP icon
+  &[data-name$=".php"]:before  { .php-icon; }
+
+  // Python icon
+  &[data-name$=".py"]:before { .python-icon; }
+
+  // Ruby icon
+  &[data-name$="Gemfile"]:before,
+  &[data-name$="Gemfile.lock"]:before,
+  &[data-name$="Rakefile"]:before,
+  &[data-name$=".gemspec"]:before,
+  &[data-name=".ruby-gemset"]:before,
+  &[data-name=".ruby-version"]:before { .ruby-icon; }
+
+  &[data-name$=".rb"]:before,
+  &[data-name$=".opal"]:before   { .ruby-icon; }
+
+  &[data-name$="_spec.rb"]:before { .comment-icon; }
+
+  &[data-name$=".pp"]:before { .puppet-icon; }
+
+  // Perl icon
+  &[data-name$=".pl"]:before,
+  &[data-name$=".pm"]:before,
+  &[data-name$=".t"]:before { .perl-icon; }
+
+  // Java icon
+  &[data-name$=".java"]:before { .java-icon; }
+
+  // Scala
+  &[data-name$=".scala"]:before { .scala-icon; }
+
+  // Haskell
+  &[data-name$=".hs"]:before { .haskell-icon; }
+
+  // Objective-C, C++, C
+  &[data-name$=".c"]:before,
+  &[data-name$=".h"]:before,
+  &[data-name$=".cpp"]:before,
+  &[data-name$=".hpp"]:before,
+  &[data-name$=".ipp"]:before,
+  &[data-name$=".m"]:before,
+  &[data-name$=".mm"]:before,
+  &[data-name$=".swift"]:before { .swift-icon; }
+
+  &[data-name$=".cs"]:before,
+  &[data-name$=".vb"]:before  { .code-icon;   }
+
+  // Secret icon
+  &[data-name$=".secret"]:before { .secret-icon; }
+
+  // Markdown (except readme.md)
+  &[data-name$=".mdown"]:before,
+  &[data-name$=".markdown"]:before,
+  &[data-name$=".mkd"]:before,
+  &[data-name$=".mkdown"]:before,
+  &[data-name$=".rmd"]:before,
+  &[data-name$=".ron"]:before,
+  &[data-name$=".md"]:before  { .markdown-icon; }
+
+  // shell
+  &[data-name$=".sh"]:before,
+  &[data-name$=".bash"]:before,
+  &[data-name=".bashrc"]:before,
+  &[data-name$=".zsh"]:before,
+  &[data-name=".zshrc"]:before,
+  &[data-name$=".fish"]:before,
+  &[data-name=".fishrc"]:before  { .terminal-icon; }
+
+  // Grunt icon
+  &[data-name="GRUNTFILE.js"]:before,
+  &[data-name="Gruntfile.js"]:before,
+  &[data-name="gruntfile.js"]:before,
+  &[data-name="GRUNTFILE.coffee"]:before,
+  &[data-name="Gruntfile.coffee"]:before,
+  &[data-name="gruntfile.coffee"]:before { .grunt-icon; }
+
+  // Gulp icon
+  &[data-name="GULPFILE.js"]:before,
+  &[data-name="Gulpfile.js"]:before,
+  &[data-name="gulpfile.js"]:before,
+  &[data-name="GULPFILE.coffee"]:before,
+  &[data-name="Gulpfile.coffee"]:before,
+  &[data-name="gulpfile.coffee"]:before { .gulp-icon; }
+
+  // Dockerfile icon
+  &[data-name="Dockerfile"]:before { .docker-icon; }
+
+  // XAML icon
+  &[data-name$=".xaml"]:before { .code-icon; }
+
+  // PowerShell icon
+  &[data-name$=".ps1"]:before { .terminal-icon; }
+
+  // Readme
+  &[data-name="README.md"]:before,
+  &[data-name="Readme.md"]:before,
+  &[data-name="readme.md"]:before { .book-icon; }
+
+  // Images
+  &[data-name$=".png"]:before,
+  &[data-name$=".gif"]:before,
+  &[data-name$=".jpg"]:before { .image-icon; }
+}

@@ -16,3 +16,8 @@ And by minimalistic i mean minimalistic.
 Edit the config.js to your liking and hit `node app`
 For better understandment of the config-file, have a look at [config.js](config.example.js)
 
+## License:
+MIT
+
+### Thanks:
+DanBrooker for his more than excelent file-icons less-styles for atom: [DanBrooker/file-icons](https://github.com/DanBrooker/file-icons)

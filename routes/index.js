@@ -1,19 +1,38 @@
 var ftp = require('../ftp');
 var conf = require("../config");
+
+var fs = require('fs');
 var path = require('path');
+
+var async = require('async');
 
 exports.index = function(req, res){
 	if(!req.user){
-		res.render('index', { title: 'Please Auth.', loggedIn: false });
+		return res.render('index', { title: 'Please Auth.', loggedIn: false });
 	}
-	else{
-		ftp.GetFiles(decodeURIComponent(req.url), req, res, function(err, files, folder, parent, curdir){
-			var parent = path.join(req.url, "..");
-			parent = parent === "\\" ? "/" : parent + "/";
-			console.log(path.join(req.url, ".."));
-			res.render('index', { title: 'Hello there!', loggedIn: true, err: err || false, files: files, folder: folder, parent: parent, curdir: curdir, isRoot: req.url.length == 1, isSecond: path.join(req.url, "..").length == 1 });
-		});
-	}
+
+	// we have to retrieve the directory relative to the users home
+	var getPath = path.join(req.user.path, decodeURIComponent(req.url));
+
+	fs.stat(getPath, function(err, stats){
+		if(err)  return res.render('index', { err: err });
+		if(stats.isFile())  return res.download(getPath);
+		if(getPath[getPath.length - 1] !== '/')  return res.redirect(getPath + '/');
+
+		ftp.getFiles(getPath, function(err, files){
+			if(err)  return res.render('index', { err: err });
+			return res.render('index', {
+				title: 'Hello there!',
+				loggedIn: true,
+				items: files,
+				curdir: getPath,
+				curdirBreadcrumb: ftp.getBreadcrumbs(getPath),
+				isRoot: req.url === req.user.path,
+				isSecond: path.join(req.url, "..").length == 1
+			});
+		})
+	});
+
 };
 
 exports.upload = function(req, res){
@@ -39,18 +58,18 @@ exports.edit = function(req, res){
 };
 
 exports.remove = function(req, res){
-	res.render('index', { title: "Delete " + req.params[0] + "?", loggedIn: true, delete: true, redirect: path.join(req.url.replace("/_sys/delete/", "/"), "..") });
+	req.params[0] = '/' + req.params[0];
+	res.render('index', { title: "Delete " + req.params[0] + "?", loggedIn: true, doDelete: true, redirect: path.join(req.params[0], ".."), filepath: req.params[0] });
 };
 
 exports.remove_yes = function(req, res){
-	if(req.user){
-		ftp.remove(req, req.params[0], function(err, redirect){
-			if(err)
-				res.render('index', { title: "Error!", err: err, loggedIn: true });
-			else
-				res.redirect(redirect);
-		});
-	} else {
-		res.render('index', { title: "Error - Please login", loggedIn: false });
-	}
+	console.log(req.user, !req.user);
+	if(!req.user)  return res.render('index', { title: "Error - Please login", loggedIn: false });
+
+	ftp.remove(req, req.params[0], function(err, redirect){
+		if(err)
+			res.render('index', { title: "Error!", err: err, loggedIn: true });
+		else
+			res.redirect(redirect);
+	});
 };

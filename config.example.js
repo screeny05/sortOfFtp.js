@@ -1,9 +1,12 @@
 // Register your own facebook-app
 module.exports = {
+  server: {
+    port: 8080
+  },
   fbcreds:{
     clientID: "",
     clientSecret: "",
-    callbackURL: "http://localhost/_sys/auth/fb/callback"
+    callbackURL: "http://localhost:8080/_sys/auth/fb/callback"
   },
   user: [
     { mail: 'bla@gmail.com', path: 'D:\\' },
